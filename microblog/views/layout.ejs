@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%= title %> - Microblog</title>
+<!--
+<link href="/stylesheets/bootstrap.css" rel="stylesheet" />
+<link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
+<style>
+body{padding-top: 60px;padding-bottom: 40px;}
+.container{width:960px;margin:0 auto;}
+</style>
+-->
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="/">Microblog</a>
+			<div class="nav-collapse">
+				<ul class="nav">
+					<li class="active"><a href="/">首頁</a></li>
+					<li><a href="/login">登入</a></li>
+					<li><a href="/reg">註冊</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="container" class="container">
+	<%- body %>
+	<hr />
+	<footer>
+		<p>
+			<a href="#" target="_blank">Cythilya</a> 2014
+		</p>
+	</footer>
+</div>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+</body>
+</html>
