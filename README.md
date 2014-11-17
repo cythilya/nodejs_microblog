@@ -3,7 +3,7 @@
 ##What is Node.js? Why use Node.js?
 [為什麼我要用Node.js？案例逐一介紹](http://blog.jobbole.com/53736)
 
-##Why use Express?
+##What is Express? Why use Express?
 [Express](http://expressjs.com)是目前最穩定、使用最廣泛開發框架，並且是Node.js官方唯一推薦的Web開發框架。BYVoid在[Node.js開發指南](https://www.byvoid.com/project/node)中提到
 
 > Express除了為HTTP模組提供了更高階的接口外，還實現了許多功能，其中包含：路由控制、模板解析支持、動態視圖、用戶會話、CSRF保護、靜態文件服務、錯誤控制器、訪問日誌、緩存、插件支持。  
