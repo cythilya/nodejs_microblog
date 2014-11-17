@@ -1,6 +1,7 @@
 #(未完成)Node.js: Microblog with Express & MongoDB
 
-##What is Node.js?
+##What is Node.js? Why use Node.js?
+[為什麼我要用Node.js？案例逐一介紹](http://blog.jobbole.com/53736)
 
 ##Why use Express?
 [Express](http://expressjs.com)是目前最穩定、使用最廣泛開發框架，並且是Node.js官方唯一推薦的Web開發框架。BYVoid在[Node.js開發指南](https://www.byvoid.com/project/node)中提到
@@ -190,27 +191,22 @@ Router是整個網站的骨架，因此優先設計。
 ###Reference
 ####開發環境建置
 - [Hello node.js - win7中的nodejs(一) 安裝篇至hello world](http://blog.friendo.com.tw/posts/238208-nodejs)
-####教學
+
+####教學 / 範例
 - [NODEJS 與 MONGODB 的邂逅](http://fred-zone.blogspot.tw/2012/01/nodejs-mongodb.html) 
-####疑難雜症
-- [Express ejs 3.*版本不支持 layout.ejs？](https://cnodejs.org/topic/50c1a0ed637ffa4155d05256)
-####範例
-####官方指南 / 參考書籍
-- [Express](http://expressjs.com)
-- [Node.js開發指南](https://www.byvoid.com/project/node)
-- [MongoDB](http://www.mongodb.org)
-####其他
-- [網頁伺服器](http://goo.gl/DKJxjI)
- 
-----
-- [用 Node.js 學 JavaScript 語言（1）簡介與安裝](http://www.codedata.com.tw/javascript/using-nodejs-to-learn-javascript)
-- [node.js教學－利用Express來寫HTTP伺服器](http://blog.allenchou.cc/nodejs-tuts-2-using-express-framework)
 - [用 Express 和 MongoDB 寫一個 todo list](http://dreamerslab.com/blog/tw/write-a-todo-list-with-express-and-mongodb)
+- [node.js教學－利用Express來寫HTTP伺服器](http://blog.allenchou.cc/nodejs-tuts-2-using-express-framework)
 - [[教學] Nodejs 學習筆記 (4) -- express framework](http://clayliao.blogspot.tw/2012/03/express-framework-on-nodejs.html)
 - [How to Use EJS in Express](http://robdodson.me/blog/2012/05/31/how-to-use-ejs-in-express)
 - [NodeJS todo list](http://levichen.logdown.com/posts/2013/11/15/nodejs-todo-list)
 
- 
+####官方指南 / 參考書籍
+- [Express](http://expressjs.com)
+- [Node.js開發指南](https://www.byvoid.com/project/node)
+- [MongoDB](http://www.mongodb.org)
 
 
-
+####疑難雜症 / 其他
+- [為什麼我要用Node.js？案例逐一介紹](http://blog.jobbole.com/53736)
+- [Express ejs 3.*版本不支持 layout.ejs？](https://cnodejs.org/topic/50c1a0ed637ffa4155d05256)
+- [網頁伺服器](http://goo.gl/DKJxjI)
