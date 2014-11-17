@@ -5,8 +5,8 @@ var http = require('http');
 var path = require('path');
 //var settings = require('./settings');
 //var MongoStore = require('connect-mongo');
-
 var app = express();
+var partials = require('express-partials');
 
 // all environments
 /*
@@ -30,9 +30,9 @@ app.set('port', process.env.PORT || 3000);
 //"_dirname" == "undefined"
 //目前app.js是在資料夾microblog中
 
-
 app.set('views', path.join(__dirname, 'views'));//設計頁面模板位置，在views子目錄下
 app.set('view engine', 'ejs');//表明要使用的模板引擎(樣板引擎，Template Engine)是ejs
+app.use(partials());
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
