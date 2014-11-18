@@ -27,6 +27,16 @@ exports.reg = function(req, res){
 };
 
 exports.doReg = function(req, res){
+	if(req.body['password-repeat'] != req.body['password']){
+		console.log('密碼輸入不一致');
+		console.log(req.body['password']);
+		console.log(req.body['password-repeat']);
+		//req.flash('error', '密碼輸入不一致');
+		return res.redirect('/reg');
+	}
+	else{
+		return res.redirect('/reg');
+	}
 };
 
 //登入

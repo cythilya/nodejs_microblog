@@ -154,7 +154,7 @@ Express 提供了路由控制權轉移的方法，即callback的第三個參數n
 partial接受兩個參數，第一個參數是Partial View名稱，第二個是資料欄位名稱。
 
 ####Express ejs 3.*版本不支援layout.ejs？
-我們可能會看到執行畫面並沒有載入Layout放置的CSS與JavaScript檔案，這是因為Express EJS 版本3後不再支援layout.ejs的緣故。解法如下：  
+我們可能會看到執行畫面並沒有載入Layout放置的CSS與JavaScript檔案，這是因為Express EJS 版本3去除了部份的Middleware，不再支援layout.ejs的緣故。解法如下：  
 
 1. 在package.json中的dependencies加入"express-partials": "*"
 2. npm install更新資源
