@@ -7,7 +7,7 @@
 //首頁
 exports.index = function(req, res){
 	res.render( 'index', {
-		title : 'To-Do List'
+		title : '歡迎來到 Microblog'
 	});	
 };
 
@@ -21,6 +21,9 @@ exports.post = function(req, res){
 
 //註冊
 exports.reg = function(req, res){
+	res.render( 'reg', {
+		title : '註冊'
+	});
 };
 
 exports.doReg = function(req, res){
