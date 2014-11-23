@@ -1,7 +1,12 @@
 #Node.js: Microblog with Express
+使用Node.js + Express建構一個簡單的微博網站。
 
 ##What is Node.js? Why use Node.js?
-[為什麼我要用Node.js？案例逐一介紹](http://blog.jobbole.com/53736)
+>Node.js 是 Ryan Dahl 基於 Google 的 V8 引擎於 2009 年釋出的一個 JavaScript 開發平台，主要聚焦於 Web 程式的開發，通常用被來寫網站。 (FROM [用 Node.js 學 JavaScript 語言（1）簡介與安裝 by 陳鍾誠 | CodeData](http://www.codedata.com.tw/javascript/using-nodejs-to-learn-javascript))
+
+已有不少前人討論為什麼要選擇Node.js這樣的開發平台，不外乎就是性能(事件驅動、非阻塞式IO的Web伺服器)，如果對這個議題有興趣的可以參考這篇文章 [為什麼我要用Node.js？案例逐一介紹](http://blog.jobbole.com/53736)。
+
+對我而言，開發上經常是HTML + CSS + JavaScript + ASP.NET C# or PHP常常導致角色錯亂或不容易專精，所以能夠使用JavaScript統一前後端真的是一大福音。
 
 ##What is Express? Why use Express?
 [Express](http://expressjs.com)是目前最穩定、使用最廣泛開發框架，並且是Node.js官方唯一推薦的Web開發框架。BYVoid在[Node.js開發指南](https://www.byvoid.com/project/node)中提到
@@ -37,13 +42,13 @@
 	});
 	app.listen(3000);
 
-我們不再需要撰寫req的事件監聽器，只需使用express.bodyParser()即可透過req.body得到post的資料(範例參考Node.js開發指南)。
+我們不再需要撰寫req的事件監聽器，只需使用express.bodyParser()即可透過req.body得到post的資料(範例參考[Node.js開發指南](https://www.byvoid.com/project/node))。
 
 ###Express筆記
 列出一些比較特別的規則或內容。
 
-####路由規則重複時，總是執行先定義的規則
-當你訪問任何被這兩條同樣的規則匹配到的路徑時，會發現請求總是被前一條路遊規則捕獲，後面的規則會被忽略，原因是Express在處理路由規則時，會優先匹配先定義的路由規則，因此後面相同的規則被屏蔽。
+####Router規則重複時，總是執行先定義的規則
+當訪問任何被這兩條同樣的規則匹配到的路徑時，總是會先執行前一條規則，後面的會被忽略，原因是Express在處理Router規則時，會優先處理先定義的規則，因此後面相同的規則被忽略。
 
 	//總是被執行
 	app.all('/user/:username', function(req, res, next) {
@@ -56,8 +61,8 @@
 		res.send('user: ' + req.params.username);
 	});
 
-####路由控制權轉移 - next()
-Express 提供了路由控制權轉移的方法，即callback的第三個參數next，透過next()，可將路由控制權轉移給後面的規則。例如：
+####Router控制權轉移 - next()
+Express 提供了Router控制權轉移的方法，即callback的第三個參數next，透過next()，可將控制權轉移給後面的規則。例如：
 	
 	//第一條路由規則被執行
 	app.all('/user/:username', function(req, res, next) {
@@ -70,7 +75,7 @@ Express 提供了路由控制權轉移的方法，即callback的第三個參數n
 		res.send('user: ' + req.params.username);
 	});
 
-當訪問被批配到的路徑時，例如http://localhost:3000/user/carbo，會發現prompt訊息 "all methods aptured"，並且瀏覽器顯示了user: carbo。意即第一條路由規則被執行，完成console.log，經由next()轉移控制權，執行第二條規則，最後返回client端。這是非常有用的，利用這樣的方式可將錯誤檢察分段化，降低程式碼的耦合度，在後面的範例中會看到。
+執行 http://localhost:3000/user/carbo，會發現prompt訊息 "all methods aptured"，並且瀏覽器顯示了user: carbo。意即第一條規則被執行，完成console.log，經由next()轉移控制權，執行第二條規則，最後返回client端。我們利用這樣的方式可將錯誤檢察分段化，降低程式碼的耦合度。
 
 ####使用模板引擎 / 樣板引擎 (Template Engine)
 
@@ -97,7 +102,7 @@ Express 提供了路由控制權轉移的方法，即callback的第三個參數n
 
  - <% code %>：JavaScript 程式碼。
  - <%= code %>：顯示替換過 HTML 特殊字符的内容。
- - <%- code %>：顯是原始 HTML 内容。
+ - <%- code %>：顯示原始 HTML 内容。
 
 ####Layout
 預設的Layout是layout.ejs，若要關掉預設值可用以下方法。
@@ -154,7 +159,7 @@ Express 提供了路由控制權轉移的方法，即callback的第三個參數n
 partial接受兩個參數，第一個參數是Partial View名稱，第二個是資料欄位名稱。
 
 ####Express ejs 3.*版本不支援layout.ejs？
-我們可能會看到執行畫面並沒有載入Layout放置的CSS與JavaScript檔案，這是因為Express EJS 版本3去除了部份的Middleware，不再支援layout.ejs的緣故。解法如下：  
+我們可能會看到執行畫面並沒有載入Layout放置的CSS與JavaScript檔案，這是因為Express EJS 版本3去除了部份的middleware，不再支援layout.ejs的緣故。解法如下：  
 
 1. 在package.json中的dependencies加入"express-partials": "*"
 2. npm install更新資源
@@ -164,23 +169,47 @@ partial接受兩個參數，第一個參數是Partial View名稱，第二個是�
 
 參考[Express ejs 3.*版本不支持 layout.ejs？](https://cnodejs.org/topic/50c1a0ed637ffa4155d05256)。
 
-##功能解說
-###Router規劃
-Router是整個網站的骨架，因此優先設計。
+##功能解說 & Demo
+開始建構一個簡單的微博網站。
+
+###Router/功能規劃
+Router是整個網站的骨架，因此優先設計，同時這也是功能的盤點。基本上一定會有首頁、使用者的個別頁面(用來展示個別使用者的發文)、註冊頁、登入頁，並且我們也需要做註冊、登入、登出、發文的動作。
 
 - 首頁：/
 - 使用者頁面：/u/[user]
-- 發表訊息頁面：/post
+- 發表訊息：/post
 - 註冊頁面：/reg
 - 登入頁面：/login
 - 執行註冊：/doReg
 - 執行登入：/doLogin
-- 登出：/logout
+- 執行登出：/logout
 
 ###註冊 / 登入
-由於這是一個簡單的範例，沒有用DB儲存使用者的註冊資訊，因此在這裡註冊和登入我們視為同一件事情。
-我們會將使用者輸入的帳號和密碼資訊先簡單存在瀏覽器的cookie中。若使用者兩次輸入的密碼不同，則我們會使用console.log提醒使用者，並refresh頁面，讓使用者重新輸入；若使用者兩次輸入的密碼相同，則將使用者的帳號與密碼存放在cookie中，然後導回首頁。
+由於這是一個簡單的範例，沒有用DB儲存使用者的註冊資訊，因此註冊和登入被視為同一件事情。我們將使用者輸入的帳號和密碼存在瀏覽器的cookie中，若使用者兩次輸入的密碼不同，則使用console.log提醒使用者密碼輸入不一致，並refresh頁面，讓使用者重新輸入；若使用者兩次輸入的密碼相同，則將帳號與密碼存放在cookie中，然後導回首頁。
 
+在View方面，在頁面上放置三個欄位 - 使用者名稱(username)、密碼(password)、重覆密碼(password-repeat)，利用input的name屬性，Form Post後將使用者輸入的值傳遞給doReg。
+
+		<div class="control-group">
+			<label class="control-label" for="username">使用者名稱</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" id="username" name="username">
+				<p class="help-block">你的帳戶的名稱，用於登入和顯示。</p>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="password">密碼</label>
+			<div class="controls">
+				<input type="password" class="input-xlarge" id="password" name="password">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="password-repeat">重覆密碼</label>
+			<div class="controls">
+				<input type="password" class="input-xlarge" id="password-repeat" name="password-repeat">
+			</div>
+		</div>
+
+doReg收到使用者輸入的值後，用req.body取出來用。[req.body](http://expressjs.com/api.html#req.body)即接受POST後解析出來的key-value資料。`req.body['username']`可取得使用者名稱，`req.body['password']`可取得密碼，`req.body['password-repeat']`可取得再次輸入的密碼。
 
 	exports.doReg = function(req, res){
 		if(req.body['password-repeat'] != req.body['password']){
@@ -188,20 +217,13 @@ Router是整個網站的骨架，因此優先設計。
 			return res.redirect('/reg');
 		}
 		else{
-		res.cookie('userid', req.body['username'], { path: '/', signed: true});		
-		res.cookie('password', req.body['password'], { path: '/', signed: true });
+			res.cookie('userid', req.body['username'], { path: '/', signed: true});		
+			res.cookie('password', req.body['password'], { path: '/', signed: true });
 			return res.redirect('/');
 		}
 	};
 
-關於cookie的用法可參考Express的官方文件：  
-
-- [res.cookie](http://expressjs.com/api.html#res.cookie)
-- [req.signedCookies](req.signedCookies)
-
-提醒，記得在app.js設定secret，例如：`app.use(express.cookieParser('123456789'));`，而且`signed: true`，這樣才能互相傳遞使用噢！
-
-我們將利用儲存好的使用者帳號和密碼來決定使用者的狀態(登入/未登入)，作為頁面顯示的判斷條件。
+我們利用儲存好的使用者帳號和密碼來決定使用者的狀態(登入/未登入)，作為頁面顯示的判斷條件。
 例如，在Navigation上，如果使用者的狀態是已登入，那麼就顯示登出link；如果狀態是未登入，則顯示登入/註冊link。
 
 	//index.js
@@ -240,9 +262,38 @@ Router是整個網站的骨架，因此優先設計。
 		</ul>
 	</div>
 
+**提醒，記得在app.js設定secret，例如：`app.use(express.cookieParser('123456789'));`，而且`signed: true`，這樣才能互相傳遞使用噢！**
+
+關於cookie的用法可參考Express的官方文件：  
+
+- [res.cookie](http://expressjs.com/api.html#res.cookie)
+- [req.signedCookies](req.signedCookies)
+
+###登出
+登出就執行clear cookie，再導回首頁。
+
+	//執行登出
+	exports.logout = function(req, res){
+		res.clearCookie('userid', { path: '/' });
+		res.clearCookie('password', { path: '/' });
+		return res.redirect('/');
+	};
+
+###發表訊息
+當使用者發表訊息時，我們利用`req.body['post']`取得發文內容，存入(push)假資料陣列，並重新導回首頁(refresh)。
+		
+    //發表訊息
+	exports.post = function(req, res){
+		var element = { id: count++, name: req.signedCookies.userid, msg: req.body['post'] };
+		postList.push(element);
+		return res.redirect('/');	
+	};
+
+###使用者頁面
+點首頁的特定使用者名稱連結時，會導向使用者的專屬頁面。我們取出目前陣列中此使用者所發表的訊息，並載入到畫面上。
 
 
-##Demo
+以上簡單完成CRUD中的Create和Read囉！之後還會繼續優化這個小專案滴。
 
 ---
 ###Reference
@@ -256,6 +307,7 @@ Router是整個網站的骨架，因此優先設計。
 - [[教學] Nodejs 學習筆記 (4) -- express framework](http://clayliao.blogspot.tw/2012/03/express-framework-on-nodejs.html)
 - [How to Use EJS in Express](http://robdodson.me/blog/2012/05/31/how-to-use-ejs-in-express)
 - [NodeJS todo list](http://levichen.logdown.com/posts/2013/11/15/nodejs-todo-list)
+- [用 Node.js 學 JavaScript 語言（1）簡介與安裝 by 陳鍾誠 | CodeData](http://www.codedata.com.tw/javascript/using-nodejs-to-learn-javascript)
 
 ####官方指南 / 參考書籍
 - [Express](http://expressjs.com)
