@@ -178,22 +178,31 @@ Router是整個網站的骨架，因此優先設計。
 - 登出：/logout
 
 ###註冊 / 登入
-在這裡我們並沒有連接DB，而是簡單先存在瀏覽器的cookie中。若使用者兩次輸入的密碼不同，則我們會使用console.log提醒使用者，並refresh頁面，讓使用者重新輸入；若使用者兩次輸入的密碼相同，則將使用者的帳號與密碼皆存放在cookie中，然後導回首頁。
+在這裡我們並沒有連接DB，而是簡單先存在瀏覽器的cookie中。若使用者兩次輸入的密碼不同，則我們會使用console.log提醒使用者，並refresh頁面，讓使用者重新輸入；若使用者兩次輸入的密碼相同，則將使用者的帳號與密碼存放在cookie中，然後導回首頁。
 
 	exports.doReg = function(req, res){
 		if(req.body['password-repeat'] != req.body['password']){
 			console.log('密碼輸入不一致。');
-			console.log('第一次輸入的密碼：' + req.body['password']);
-			console.log('第二次輸入的密碼：' + req.body['password-repeat']);
 			return res.redirect('/reg');
 		}
 		else{
-			//register success, redirect to index
-			res.cookie('userid', req.body['username'], { path: '/' });		
-			res.cookie('password', req.body['password'], { path: '/' });
+		res.cookie('userid', req.body['username'], { path: '/', signed: true});		
+		res.cookie('password', req.body['password'], { path: '/', signed: true });
 			return res.redirect('/');
 		}
 	};
+
+關於cookie的用法可參考Express的官方文件：  
+
+- [res.cookie](http://expressjs.com/api.html#res.cookie)
+- [req.signedCookies](req.signedCookies)
+
+提醒，記得在app.js設定secret，例如：`app.use(express.cookieParser('123456789'));`，而且`signed: true`，這樣才能互相傳遞使用噢！
+
+
+
+
+
 
 ##Demo
 

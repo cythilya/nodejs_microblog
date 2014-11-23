@@ -5,7 +5,6 @@ var http = require('http');
 var path = require('path');
 var app = express();
 var partials = require('express-partials');
-
 // all environments
 /*
 app.set是express的參數設置工具，接受key-value，可用的參數如下：
@@ -37,7 +36,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.bodyParser());//解析client端請求，通常是透過POST發送的內容
-app.use(express.cookieParser());
+app.use(express.cookieParser('123456789'));//記得設定key來傳遞資訊
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -71,7 +70,7 @@ app.get('/login', routes.login);
 app.post('/login', routes.doLogin);
 app.get('/logout', routes.logout );
 
-http.createServer(app).listen(app.get('port'), function(){ 
+http.createServer(app).listen(app.get('port'), function( req, res ){ 
 	//建立app instance
 	//服務器通過app.listen（3000）;啟動，監聽3000端口。
 	console.log('Express server listening on port ' + app.get('port'));
