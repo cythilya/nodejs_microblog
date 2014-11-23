@@ -3,8 +3,6 @@ var express = require('express'); //從local取得express
 var routes = require('./routes'); //等同於"./routes/index.js"，指定路徑返回內容，相當於MVC中的Controller
 var http = require('http');
 var path = require('path');
-//var settings = require('./settings');
-//var MongoStore = require('connect-mongo');
 var app = express();
 var partials = require('express-partials');
 
@@ -40,14 +38,6 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.bodyParser());//解析client端請求，通常是透過POST發送的內容
 app.use(express.cookieParser());
-/*
-app.use(express.session({
-	secret: settings.cookieSecret,
-	store: new MongoStore({
-		db: settings.db
-	})
-}));
-*/
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 

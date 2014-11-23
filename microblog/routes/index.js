@@ -28,14 +28,17 @@ exports.reg = function(req, res){
 
 exports.doReg = function(req, res){
 	if(req.body['password-repeat'] != req.body['password']){
-		console.log('密碼輸入不一致');
-		console.log(req.body['password']);
-		console.log(req.body['password-repeat']);
+		console.log('密碼輸入不一致。');
+		console.log('第一次輸入的密碼：' + req.body['password']);
+		console.log('第二次輸入的密碼：' + req.body['password-repeat']);
 		//req.flash('error', '密碼輸入不一致');
 		return res.redirect('/reg');
 	}
 	else{
-		return res.redirect('/reg');
+		//register success, redirect to index
+		res.cookie('userid', req.body['username'], { path: '/' });		
+		res.cookie('password', req.body['password'], { path: '/' });
+		return res.redirect('/');
 	}
 };
 
