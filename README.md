@@ -178,7 +178,9 @@ Router是整個網站的骨架，因此優先設計。
 - 登出：/logout
 
 ###註冊 / 登入
-在這裡我們並沒有連接DB，而是簡單先存在瀏覽器的cookie中。若使用者兩次輸入的密碼不同，則我們會使用console.log提醒使用者，並refresh頁面，讓使用者重新輸入；若使用者兩次輸入的密碼相同，則將使用者的帳號與密碼存放在cookie中，然後導回首頁。
+由於這是一個簡單的範例，沒有用DB儲存使用者的註冊資訊，因此在這裡註冊和登入我們視為同一件事情。
+我們會將使用者輸入的帳號和密碼資訊先簡單存在瀏覽器的cookie中。若使用者兩次輸入的密碼不同，則我們會使用console.log提醒使用者，並refresh頁面，讓使用者重新輸入；若使用者兩次輸入的密碼相同，則將使用者的帳號與密碼存放在cookie中，然後導回首頁。
+
 
 	exports.doReg = function(req, res){
 		if(req.body['password-repeat'] != req.body['password']){
@@ -199,8 +201,44 @@ Router是整個網站的骨架，因此優先設計。
 
 提醒，記得在app.js設定secret，例如：`app.use(express.cookieParser('123456789'));`，而且`signed: true`，這樣才能互相傳遞使用噢！
 
+我們將利用儲存好的使用者帳號和密碼來決定使用者的狀態(登入/未登入)，作為頁面顯示的判斷條件。
+例如，在Navigation上，如果使用者的狀態是已登入，那麼就顯示登出link；如果狀態是未登入，則顯示登入/註冊link。
+
+	//index.js
+	//檢查使用者登入狀態
+	var isLogin = false;
+	var checkLoginStatus = function(req, res){
+		isLogin = false;
+		if(req.signedCookies.userid && req.signedCookies.password){
+			isLogin = true;
+		}
+	};
+	
+	//首頁
+	exports.index = function(req, res){
+		checkLoginStatus(req, res);
+		
+		res.render( 'index', {
+			title : '歡迎來到 Microblog', 
+			loginStatus : isLogin
+		});	
+	};
 
 
+畫面：
+
+	//index.ejs
+	<div class="nav-collapse">
+		<ul class="nav">
+			<li class="active"><a href="/">首頁</a></li>
+			<% if (loginStatus) { %>
+				<li><a href="/logout">登出</a></li>
+			<% } else{ %>
+				<li><a href="/login">登入</a></li>
+				<li><a href="/reg">註冊</a></li>
+			<% } %>
+		</ul>
+	</div>
 
 
 
