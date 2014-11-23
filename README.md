@@ -262,7 +262,7 @@ doReg收到使用者輸入的值後，用req.body取出來用。[req.body](http:
 		</ul>
 	</div>
 
-**提醒，記得在app.js設定secret，例如：`app.use(express.cookieParser('123456789'));`，而且`signed: true`，這樣才能互相傳遞使用噢！**
+提醒，記得在app.js設定secret，例如：`app.use(express.cookieParser('123456789'));`，而且`signed: true`，這樣才能互相傳遞使用噢！
 
 關於cookie的用法可參考Express的官方文件：  
 
