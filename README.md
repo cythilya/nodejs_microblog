@@ -1,4 +1,4 @@
-#(未完成)Node.js: Microblog with Express & MongoDB
+#Node.js: Microblog with Express
 
 ##What is Node.js? Why use Node.js?
 [為什麼我要用Node.js？案例逐一介紹](http://blog.jobbole.com/53736)
@@ -164,10 +164,6 @@ partial接受兩個參數，第一個參數是Partial View名稱，第二個是�
 
 參考[Express ejs 3.*版本不支持 layout.ejs？](https://cnodejs.org/topic/50c1a0ed637ffa4155d05256)。
 
-##Why use MongoDB?
-BYVoid在[Node.js開發指南](https://www.byvoid.com/project/node)中提到
->我們選用的MongoDB作為網站的資料庫，它是一個開源的NoSQL的資料庫，相比MySQL的那样的關聯式資料數，它更為輕巧、靈活，非常適合在資料量龐大、事務性不强的場合下使用。
-
 ##功能解說
 ###Router規劃
 Router是整個網站的骨架，因此優先設計。
@@ -175,15 +171,29 @@ Router是整個網站的骨架，因此優先設計。
 - 首頁：/
 - 使用者頁面：/u/[user]
 - 發表訊息頁面：/post
-- 註冊：/reg
-- 登入：/login
+- 註冊頁面：/reg
+- 登入頁面：/login
+- 執行註冊：/doReg
+- 執行登入：/doLogin
 - 登出：/logout
 
-###安裝MongoDB
-[MongoDB](http://www.mongodb.org)
+###註冊 / 登入
+在這裡我們並沒有連接DB，而是簡單先存在瀏覽器的cookie中。若使用者兩次輸入的密碼不同，則我們會使用console.log提醒使用者，並refresh頁面，讓使用者重新輸入；若使用者兩次輸入的密碼相同，則將使用者的帳號與密碼皆存放在cookie中，然後導回首頁。
 
-###建立settings.js
-儲存與資料庫連接的資料。
+	exports.doReg = function(req, res){
+		if(req.body['password-repeat'] != req.body['password']){
+			console.log('密碼輸入不一致。');
+			console.log('第一次輸入的密碼：' + req.body['password']);
+			console.log('第二次輸入的密碼：' + req.body['password-repeat']);
+			return res.redirect('/reg');
+		}
+		else{
+			//register success, redirect to index
+			res.cookie('userid', req.body['username'], { path: '/' });		
+			res.cookie('password', req.body['password'], { path: '/' });
+			return res.redirect('/');
+		}
+	};
 
 ##Demo
 
