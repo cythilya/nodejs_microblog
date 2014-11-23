@@ -8,28 +8,23 @@
 	</p>
 </div>
 <% } else { %>
-	<%- partial('say') %> 
+	<form method="post" action="/post" class="well form-inline center" style="text-align:center;">
+		<input type="text" class="span8" name="post">
+		<button type="submit" class="btn btn-success"><i class="icon-comment icon-white"></i>發言</button>
+	</form>
 <% } %>
-<div class="row">
-	<div class="span4">
-		<h2>Carbo 說</h2>
-		<p>東風破早梅向暖一枝開冰雪無人見春從天上</p>
-	</div>
-	<div class="span4">
-		<h2>BYVoid 說</h2>
-		<p>
-			開放的中國轉換（OpenCC）是一個開源的中文簡繁轉換項目，
-			致力於製作高質量的基於統計預料的簡繁轉換詞庫。
-			在線轉換服務及圖形用戶界面。
-		</p>
-	</div>
-	<div class="span4">
-		<h2>佛振 說</h2>
-		<p>
-			中州韻輸入法引擎/霧凇輸入法引擎取意歷史上通行的中州韻，
-			願寫就一部匯集音韻學智慧的輸入法經典之作。
-			項目網站設在http://code.google.com/p/rimeime/
-			使其成為一款個性十足的開源輸入法。
-		</p>
-	</div>
-</div>
+<% posts.forEach(function(post, index) { 
+  if (index % 3 == 0) { %>
+    <div class="row">
+<%} %>
+  <div class="span4">
+    <h2><a href="/u/<%= post.name %>"><%= post.name %></a> 說</h2>
+    <p><%= post.msg %></p>
+  </div>
+<% if (index % 3 == 2) { %>
+    </div>
+<% } %>
+<%}) %>
+<% if (posts.length % 3 != 0) { %>
+  </div>
+<%} %>
