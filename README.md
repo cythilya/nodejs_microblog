@@ -290,10 +290,12 @@ doReg收到使用者輸入的值後，用req.body取出來用。[req.body](http:
 	};
 
 ###使用者頁面
-點首頁的特定使用者名稱連結時，會導向使用者的專屬頁面。我們取出目前陣列中此使用者所發表的訊息，並載入到畫面上。
+點首頁的特定使用者名稱連結時，會導向使用者的專屬頁面。我們取出目前陣列中此使用者所發表的訊息，並載入到畫面上。  
 
+以上簡單完成CRUD中的Create和Read囉！之後還會繼續優化這個小專案程式滴。
 
-以上簡單完成CRUD中的Create和Read囉！之後還會繼續優化這個小專案滴。
+###程式碼範例下載
+[NodeJS-Microblog in Github](https://github.com/cythilya/NodeJS-Microblog)
 
 ---
 ###Reference
