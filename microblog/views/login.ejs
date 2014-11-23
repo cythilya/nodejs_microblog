@@ -1,20 +1,27 @@
-<form class="form-horizontal" method="post">
-  <fieldset>
-    <legend>用戶登入</legend>
-    <div class="control-group">
-      <label class="control-label" for="username">用戶名</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge" id="username" name="username">
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="password">口令</label>
-      <div class="controls">
-        <input type="password" class="input-xlarge" id="password" name="password">
-      </div>
-    </div>
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">登入</button>
-    </div>
-  </fieldset>
+<form class="form-horizontal" method="post" action="">
+	<fieldset>
+		<legend>使用者登入</legend>
+		<div class="control-group">
+			<label class="control-label" for="username">使用者名稱</label>
+			<div class="controls">
+				<input type="text" class="input-xlarge" id="username" name="username">
+				<p class="help-block">你的帳戶的名稱，用於登入和顯示。</p>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="password">密碼</label>
+			<div class="controls">
+				<input type="password" class="input-xlarge" id="password" name="password">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="password-repeat">重覆密碼</label>
+			<div class="controls">
+				<input type="password" class="input-xlarge" id="password-repeat" name="password-repeat">
+			</div>
+		</div>
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">註冊</button>
+		</div>
+	</fieldset>
 </form>

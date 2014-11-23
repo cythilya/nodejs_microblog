@@ -23,17 +23,7 @@ exports.index = function(req, res){
 	});	
 };
 
-//使用者頁面
-exports.user = function(req, res){
-	checkLoginStatus(req, res);
-};
-
-//發表訊息頁面
-exports.post = function(req, res){
-	checkLoginStatus(req, res);
-};
-
-//註冊
+//註冊頁面
 exports.reg = function(req, res){
 	checkLoginStatus(req, res);
 	res.render( 'reg', {
@@ -42,12 +32,12 @@ exports.reg = function(req, res){
 	});
 };
 
+//執行註冊
 exports.doReg = function(req, res){
 	if(req.body['password-repeat'] != req.body['password']){
 		console.log('密碼輸入不一致。');
 		console.log('第一次輸入的密碼：' + req.body['password']);
 		console.log('第二次輸入的密碼：' + req.body['password-repeat']);
-		//req.flash('error', '密碼輸入不一致');
 		return res.redirect('/reg');
 	}
 	else{
@@ -58,15 +48,59 @@ exports.doReg = function(req, res){
 	}
 };
 
-//登入
+//登入頁面
 exports.login = function(req, res){
 	checkLoginStatus(req, res);
+	res.render( 'login', {
+		title : '登入',
+		loginStatus : isLogin
+	});
 };
 
+//執行登入
 exports.doLogin = function(req, res){
+	if(req.body['password-repeat'] != req.body['password']){
+		console.log('密碼輸入不一致。');
+		console.log('第一次輸入的密碼：' + req.body['password']);
+		console.log('第二次輸入的密碼：' + req.body['password-repeat']);
+		return res.redirect('/reg');
+	}
+	else{
+		//register success, redirect to index
+		res.cookie('userid', req.body['username'], { path: '/', signed: true});		
+		res.cookie('password', req.body['password'], { path: '/', signed: true });
+		return res.redirect('/');
+	}
 };
 
-//登出
+//執行登出
 exports.logout = function(req, res){
+	res.clearCookie('userid', { path: '/' });
+	res.clearCookie('password', { path: '/' });
+	console.log('dd');
+	return res.redirect('/');
+};
+
+//------------------------------------------------
+
+
+
+//使用者頁面
+exports.user = function(req, res){
 	checkLoginStatus(req, res);
 };
+
+//發表訊息頁面
+exports.post = function(req, res){
+	checkLoginStatus(req, res);
+};
+
+
+
+
+
+
+
+
+
+

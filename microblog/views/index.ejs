@@ -1,13 +1,15 @@
+<% if (!loginStatus) { %>
 <div class="hero-unit">
 	<h1>歡迎來到 Microblog</h1>
 	<p>Microblog 是一個基於 Node.js 的微博系统。</p>
-	<% if (!loginStatus) { %>
 	<p>
 		<a class="btn btn-primary btn-large" href="/login">登入</a>
 		<a class="btn btn-large" href="/reg">立即註冊</a>
 	</p>
-	<% } %>
 </div>
+<% } else { %>
+	<%- partial('say') %> 
+<% } %>
 <div class="row">
 	<div class="span4">
 		<h2>Carbo 說</h2>
