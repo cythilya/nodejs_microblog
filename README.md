@@ -187,6 +187,8 @@ Router是整個網站的骨架，因此優先設計，同時這也是功能的�
 ###註冊 / 登入
 由於這是一個簡單的範例，沒有用DB儲存使用者的註冊資訊，因此註冊和登入被視為同一件事情。我們將使用者輸入的帳號和密碼存在瀏覽器的cookie中，若使用者兩次輸入的密碼不同，則使用console.log提醒使用者密碼輸入不一致，並refresh頁面，讓使用者重新輸入；若使用者兩次輸入的密碼相同，則將帳號與密碼存放在cookie中，然後導回首頁。
 
+![Node.js microblog 登入](https://lh4.googleusercontent.com/bfi_add67nCqQzqy-5Y_8eMyUd2j0rw3n4HeZ89EUE0=w1194-h828-no)
+
 在View方面，在頁面上放置三個欄位 - 使用者名稱(username)、密碼(password)、重覆密碼(password-repeat)，利用input的name屬性，Form Post後將使用者輸入的值傳遞給doReg。
 
 		<div class="control-group">
@@ -269,18 +271,10 @@ doReg收到使用者輸入的值後，用req.body取出來用。[req.body](http:
 - [res.cookie](http://expressjs.com/api.html#res.cookie)
 - [req.signedCookies](req.signedCookies)
 
-###登出
-登出就執行clear cookie，再導回首頁。
-
-	//執行登出
-	exports.logout = function(req, res){
-		res.clearCookie('userid', { path: '/' });
-		res.clearCookie('password', { path: '/' });
-		return res.redirect('/');
-	};
-
 ###發表訊息
 當使用者發表訊息時，我們利用`req.body['post']`取得發文內容，存入(push)假資料陣列，並重新導回首頁(refresh)。
+
+![Node.js microblog 發表訊息](https://lh5.googleusercontent.com/-SKZNiWtzSdE/VHGbvTh4PbI/AAAAAAAADe8/Smq557F7wZ8/w1194-h828-no/microblog_post.gif)
 		
     //發表訊息
 	exports.post = function(req, res){
@@ -291,6 +285,20 @@ doReg收到使用者輸入的值後，用req.body取出來用。[req.body](http:
 
 ###使用者頁面
 點首頁的特定使用者名稱連結時，會導向使用者的專屬頁面。我們取出目前陣列中此使用者所發表的訊息，並載入到畫面上。  
+
+![Node.js microblog 使用者頁面](https://lh3.googleusercontent.com/-gWTUpGJPHKg/VHGdFCg9cmI/AAAAAAAADfE/yId_FNgEzy4/w1194-h686-no/microblog_user_page.gif)
+
+###登出
+登出就執行clear cookie，再導回首頁。
+
+![Node.js microblog 登出](https://lh4.googleusercontent.com/-AjMColj8qeo/VHGdzT3DtnI/AAAAAAAADfk/rxHnJ9hGQs0/w1194-h686-no/microblog_logout.gif)
+
+	//執行登出
+	exports.logout = function(req, res){
+		res.clearCookie('userid', { path: '/' });
+		res.clearCookie('password', { path: '/' });
+		return res.redirect('/');
+	};
 
 以上簡單完成CRUD中的Create和Read囉！之後還會繼續優化這個小專案程式滴。
 
