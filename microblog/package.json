@@ -6,8 +6,9 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.4.7",
-    "jade": "*",
-	"express-partials": "*"
+    "ejs": "^2.3.1",
+    "express": "^3.4.7",
+    "express-partials": "^0.3.0",
+    "jade": "^1.11.0"
   }
 }
