@@ -104,7 +104,7 @@ Express 提供了Router控制權轉移的方法，即callback的第三個參數n
  - <%= code %>：顯示替換過 HTML 特殊字符的内容。
  - <%- code %>：顯示原始 HTML 内容。
 
-####Layout
+#### Layout
 預設的Layout是layout.ejs，若要關掉預設值可用以下方法。
 
 	app.set('view options', {
@@ -169,7 +169,7 @@ partial接受兩個參數，第一個參數是Partial View名稱，第二個是�
 
 參考[Express ejs 3.*版本不支持 layout.ejs？](https://cnodejs.org/topic/50c1a0ed637ffa4155d05256)。
 
-##功能解說 & Demo
+## 功能解說 & Demo
 開始建構一個簡單的微博網站。
 
 ### Router/功能規劃
