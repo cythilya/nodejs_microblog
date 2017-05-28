@@ -366,4 +366,4 @@ exports.logout = function(req, res){
 - [網頁伺服器](http://goo.gl/DKJxjI)
 
 ---
-網誌版-[使用 Node.js + Express 建構一個簡單的微博網站](/2014/11/23/nodejs-express-microblog/)。
+網誌版-[使用 Node.js + Express 建構一個簡單的微博網站](https://cythilya.github.io/2014/11/23/nodejs-express-microblog/)。
