@@ -300,8 +300,8 @@ exports.index = function(req, res){
 
 關於 cookie 的用法可參考 Express 的官方文件：
 
-- [res.cookie](http://expressjs.com/api.html#res.cookie)
-- [req.signedCookies](req.signedCookies)
+- [res.cookie](http://expressjs.com/en/api.html#res.cookie)
+- [req.signedCookies](http://expressjs.com/en/api.html#req.signedCookies)
 
 ### 發表訊息
 當使用者發表訊息時，我們利用`req.body['post']`取得發文內容，存入（push）假資料陣列，並重新導回首頁。
