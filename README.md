@@ -214,7 +214,7 @@ Router 是整個網站的骨架，因此優先設計，同時這也是功能的�
 ### 註冊 / 登入
 由於這是一個簡單的範例，沒有用 DB 儲存使用者的註冊資訊，因此註冊和登入被視為同一件事情。我們將使用者輸入的帳號和密碼存在瀏覽器的 cookie 中，若使用者兩次輸入的密碼不同，則使用`console.log`提醒使用者密碼輸入不一致，並 refresh 頁面，讓使用者重新輸入；若使用者兩次輸入的密碼相同，則將帳號與密碼存放在 cookie 中，然後導回首頁。
 
-![Node.js microblog 登入](/assets/2014-11-23-nodejs-express-microblog-login.gif)
+![Node.js microblog 登入](https://cythilya.github.io/assets/2014-11-23-nodejs-express-microblog-login.gif)
 
 在 View 方面，在頁面上放置三個欄位 - 使用者名稱（username）、密碼（password）、重覆密碼（password-repeat），利用 input 的 name 屬性，form post 後將使用者輸入的值傳遞給 doReg。
 
@@ -306,7 +306,7 @@ exports.index = function(req, res){
 ### 發表訊息
 當使用者發表訊息時，我們利用`req.body['post']`取得發文內容，存入（push）假資料陣列，並重新導回首頁。
 
-![Node.js microblog 發表訊息](/assets/2014-11-23-nodejs-express-microblog-post.gif)
+![Node.js microblog 發表訊息](https://cythilya.github.io/assets/2014-11-23-nodejs-express-microblog-post.gif)
 
 ```javascript
 // 發表訊息
@@ -320,12 +320,12 @@ exports.post = function(req, res){
 ### 使用者頁面
 點首頁的特定使用者名稱連結時，會導向使用者的專屬頁面。我們取出目前陣列中此使用者所發表的訊息，並載入到畫面上。
 
-![Node.js microblog 使用者頁面](/assets/2014-11-23-nodejs-express-microblog-user-page.gif)
+![Node.js microblog 使用者頁面](https://cythilya.github.io/assets/2014-11-23-nodejs-express-microblog-user-page.gif)
 
 ### 登出
 登出就執行 clear cookie，再導回首頁。
 
-![Node.js microblog 登出](/assets/2014-11-23-nodejs-express-microblog-logout.gif)
+![Node.js microblog 登出](https://cythilya.github.io/assets/2014-11-23-nodejs-express-microblog-logout.gif)
 
 ```javascript
 // 執行登出
